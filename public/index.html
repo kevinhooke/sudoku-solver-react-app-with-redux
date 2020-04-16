@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>Kevin's Sudoku Solver</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <h1>Sudoku Solver</h1>
+    <h3>Kevin Hooke, March 2019</h3>
+    <h2>What is this?</h2>
+    <p>This is a Sudoku puzzle solver. Populate the puzzle grid below with a
+    Sudoku puzzle and press the 'Solve' button.</p>
+    <p>Note: this solver only currently works with 'proper' Sudoku puzzles (see
+      <a target="_blank" href="https://en.wikipedia.org/wiki/Mathematics_of_Sudoku#Minimum_number_of_givens">
+        here</a>), which are puzzles with only a single, unique solution.</p>
+    <h2>How does it work?</h2>
+    <p>This is a React web client to a Java based AWS Lambda that solves Sudoku puzzles.
+    The content of the grid is sent to the Lambda, and if there is a single, unique solution,
+    it is returned and displayed in the grid.</p>
+    <p>The Solver uses my implementation of Donald Knuth's
+      <a target="_blank" href="https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X">
+        Algorithm X</a> and Dancing Links implemented in Java, which you can find
+      <a target="_blank" href="https://github.com/kevinhooke/sudoku-solver-with-dlx">here</a>.</p>
+    <div id="root"></div>
+  </body>
+</html>

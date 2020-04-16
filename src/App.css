@@ -1,0 +1,45 @@
+.App {
+}
+
+.sudoku-grid-container{
+}
+
+.buttons{
+  text-align: center;
+}
+
+.cell {
+  width: 20px;
+  font-size: 18px;
+}
+
+.sudoku-grid{
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+.sudoku-grid tbody tr td{
+  border: 1px solid;
+  border-color: blue;
+  padding: 1px;
+}
+
+/* set 1st column left border */
+.sudoku-grid tbody tr td:nth-child(1){
+  border-left: 3px solid;
+}
+
+/* right border for every 3rd td */
+.sudoku-grid tbody tr td:nth-child(3n){
+  border-right: 3px solid;
+}
+
+/* top border for first row */
+.sudoku-grid tbody tr:nth-child(1){
+  border-top: 3px solid;
+}
+
+/* bottom border for every 3rd tr row */
+.sudoku-grid tbody tr:nth-child(3n){
+  border-bottom: 3px solid;
+}
