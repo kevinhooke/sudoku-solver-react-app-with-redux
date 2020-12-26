@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import CellComponent from "../components/CellComponent";
-//import SudokuSolverAction from "../actions/SudokuSolverAction";
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { updatePuzzleData, clearData, initSamplePuzzle } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
@@ -17,25 +15,6 @@ const mapStateToProps = state => {
         message: state.message
      };
 };
-
-// const updatePuzzleDataCreator = grid => updatePuzzleData(grid);
-
-// const clearDataCreator = () => clearData();
-
-// const initSamplePuzzleCreator = () => initSamplePuzzle();
-
-// function mapDispatchToProps(dispatch) {
-
-//     const boundCreators = bindActionCreators( {
-//         updatePuzzleDataCreator,
-//         clearDataCreator,
-//         initSamplePuzzleCreator
-//         }, dispatch);
-
-//     return {
-//         boundCreators   
-//     }
-// }
 
 function mapDispatchToProps(dispatch) {
     return {
@@ -67,12 +46,8 @@ class ConnectedSudokuSolver extends Component {
         for (var row = 0; row < 9; row++) {
             this.state.grid[row] = [];
         }
-        // this.state = {
-        //     grid : this.props.grid,
-        //     message : this.props.message
-        // }
-
-        this.onChange = this.onChange.bind(this);
+        //Flux approach
+        //this.onChange = this.onChange.bind(this);
         this.onError = this.onError.bind(this);
     };
 
@@ -102,13 +77,19 @@ class ConnectedSudokuSolver extends Component {
     handleClear(event) {
         event.preventDefault();
         console.log("clear pressed");
+        //Flux approach:
         //SudokuSolverAction.clearData();
+
+        //Redux Action creator
         this.props.clearData();
     }
 
     handleRestSample(event){
         event.preventDefault();
+        //Flux approach:
         //SudokuSolverAction.initSamplePuzzle();
+
+        //Redux Action creator
         this.props.initSamplePuzzle();
     }
 
@@ -116,9 +97,12 @@ class ConnectedSudokuSolver extends Component {
      * Load initial state with a sample.
      */
     componentWillMount() {
+        //Flux approach:
         //SudokuSolverStore.addChangeListener(this.onChange);
         //SudokuSolverStore.addErrorListener(this.onError);
         //SudokuSolverAction.initSamplePuzzle();
+
+        //Redux Action creator
         this.props.initSamplePuzzle();
     }
 
@@ -131,10 +115,11 @@ class ConnectedSudokuSolver extends Component {
     /**
      * Updates state when an event is triggered from the Store.
      */
-    onChange() {
-        console.log('SudokuSolver onChange triggered');
-        //this.setState({grid: SudokuSolverStore.getData()});
-    }
+    //Not needed with Redux
+    //onChange() {
+    //    console.log('SudokuSolver onChange triggered');
+    //    //this.setState({grid: SudokuSolverStore.getData()});
+    //}
 
     render() {
         return (
