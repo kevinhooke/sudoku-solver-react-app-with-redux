@@ -5,7 +5,6 @@ var puzzleData = {
 }
 
 var message = {
-
 }
 
 class SudokuSolverStore extends EventEmitter {

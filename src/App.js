@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className="App">
           <h3>Sudoku Solver</h3>
-        <SudokuSolver/>
+          <SudokuSolver/>
       </div>
     );
   }
