@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { updatePuzzleData, clearData, initSamplePuzzle } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
+    //if grid is undefined, initialize with empty arrays which we use later
+    //to draw the grid
     if(state.grid == null){
         state.grid = [];
         for (var row = 0; row < 9; row++) {
@@ -46,7 +48,7 @@ class ConnectedSudokuSolver extends Component {
         for (var row = 0; row < 9; row++) {
             this.state.grid[row] = [];
         }
-        //Flux approach
+        //Flux approach, not needed with Redux
         //this.onChange = this.onChange.bind(this);
         this.onError = this.onError.bind(this);
     };
