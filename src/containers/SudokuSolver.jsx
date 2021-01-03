@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CellComponent from "../components/CellComponent";
 import { connect } from 'react-redux';
-import { updatePuzzleData, clearData, initSamplePuzzle } from '../actions/actionCreators';
+import { updatePuzzleData, clearData, initSamplePuzzle, fetchPuzzleSolution } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
     //if grid is undefined, initialize with empty arrays which we use later
@@ -22,7 +22,8 @@ function mapDispatchToProps(dispatch) {
     return {
         updatePuzzleData :  grid => dispatch(updatePuzzleData(grid)),
         clearData : () => dispatch(clearData()),
-        initSamplePuzzle : () => dispatch(initSamplePuzzle())
+        initSamplePuzzle : () => dispatch(initSamplePuzzle()),
+        fetchPuzzleSolution : () => fetchPuzzleSolution() 
     }
 }
 
@@ -50,7 +51,12 @@ class ConnectedSudokuSolver extends Component {
         }
         //Flux approach, not needed with Redux
         //this.onChange = this.onChange.bind(this);
-        this.onError = this.onError.bind(this);
+        //this.onError = this.onError.bind(this);
+
+        this.handleGridChange = this.handleGridChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClear = this.handleClear.bind(this);
+        this.handleResetSample = this.handleResetSample.bind(this);
     };
 
     //handler approach 2:
@@ -74,6 +80,8 @@ class ConnectedSudokuSolver extends Component {
         console.log("submit pressed");
         //TODO add fetch
         //SudokuSolverAction.callSolverLambda();
+        //Redux Action creator
+        this.props.fetchPuzzleSolution();
     }
 
     handleClear(event) {
@@ -86,8 +94,8 @@ class ConnectedSudokuSolver extends Component {
         this.props.clearData();
     }
 
-    handleRestSample(event){
-        event.preventDefault();
+    handleResetSample(event){
+        //event.preventDefault();
         //Flux approach:
         //SudokuSolverAction.initSamplePuzzle();
 
@@ -130,7 +138,7 @@ class ConnectedSudokuSolver extends Component {
                 <div className="buttons">
                     <button className="buttons" onClick={this.handleSubmit}>Solve Puzzle</button>
                     <button className="buttons" onClick={this.handleClear}>Clear grid</button>
-                    <button className="buttons" onClick={this.handleRestSample}>Reload sample puzzle</button>
+                    <button className="buttons" onClick={this.handleResetSample}>Reload sample puzzle</button>
                 </div>
 
                 <table className="sudoku-grid">

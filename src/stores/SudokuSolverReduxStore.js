@@ -6,6 +6,7 @@ import { devToolsEnhancer } from 'redux-devtools-extension';
 var puzzleData = {
 }
 
+//TODO: reducer should be moved out to it's own file
 // reducer for changing puzzleData state
 function puzzleDataReducer(state = puzzleData, action) {
     switch (action.type) {
@@ -18,7 +19,8 @@ function puzzleDataReducer(state = puzzleData, action) {
         //    break;
 
         case 'NEW_DATA' :
-            return Object.assign( {}, { grid: action.data } );
+            console.log("puzzleDataReducer is handling NEW_DATA action! ");
+            return Object.assign( {}, { grid: action.grid } );
 
         // case 'UPDATE_PREVIOUS':
         //     console.log("SudokuSolverReduxStore is handling UPDATE action!: "
@@ -34,7 +36,7 @@ function puzzleDataReducer(state = puzzleData, action) {
         //     break;
 
         case 'UPDATE':
-            console.log("SudokuSolverReduxStore is handling UPDATE action!: "
+            console.log("puzzleDataReducer is handling UPDATE action!: "
                 + JSON.stringify(action.data));
             var newData = [];
 
@@ -50,6 +52,7 @@ function puzzleDataReducer(state = puzzleData, action) {
         //     break;
 
         case 'ERROR' :
+            console.log("puzzleDataReducer is handling ERROR action!");
             let result = Object.assign( {}, { message : action.message } );
             return Object.assign( result, action.data );
 
