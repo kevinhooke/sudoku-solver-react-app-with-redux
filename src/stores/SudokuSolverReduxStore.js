@@ -1,4 +1,4 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 
@@ -58,8 +58,14 @@ function puzzleDataReducer(state = puzzleData, action) {
     }
 }
 
-const middlewares = [thunk, devToolsEnhancer()];
-
 //let store = createStore(puzzleDataReducer, devToolsEnhancer());
-let store = createStore(puzzleDataReducer, applyMiddleware(...middlewares));
+//first attempt
+//const middlewares = [thunk, devToolsEnhancer()];
+//let store = createStore(puzzleDataReducer, applyMiddleware(...middlewares));
+//using compose
+let store = createStore(puzzleDataReducer, compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
+);
 export default store;
