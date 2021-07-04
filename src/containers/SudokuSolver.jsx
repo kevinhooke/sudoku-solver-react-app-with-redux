@@ -133,109 +133,129 @@ class ConnectedSudokuSolver extends Component {
 
     render() {
         return (
-            <div className="sudoku-grid-container">
-                <div id="messages">{this.props.message}</div>
-                <div className="buttons">
-                    <button className="buttons" onClick={this.handleSubmit}>Solve Puzzle</button>
-                    <button className="buttons" onClick={this.handleClear}>Clear grid</button>
-                    <button className="buttons" onClick={this.handleResetSample}>Reload sample puzzle</button>
+            <div class="main-container">
+                <div class="button-container">
+                    <div id="messages">{this.props.message}</div>
+                    <div>
+                        <button className="buttons" onClick={this.handleSubmit}>Solve Puzzle</button>
+                    </div>
+                    <div>
+                        <button className="buttons" onClick={this.handleClear}>Clear grid</button>
+                    </div>
+                    <div>
+                        <button className="buttons" onClick={this.handleResetSample}>Reload sample puzzle</button>
+                    </div>
+                    <div>
+                        <br/>
+                    </div>
+                    <div>
+                        <button>Load easy puzzle</button>                        
+                    </div>
+                    <div>
+                        <button>Load medium puzzle</button>                        
+                    </div>
+                    <div>
+                        <button>Load hard puzzle</button>                        
+                    </div>
                 </div>
+                <div className="sudoku-grid-container">
 
-                <table className="sudoku-grid">
-                    <tbody>
-                    <tr>
-                        {
-                            this.props.grid[0].map((cell, colIndex) => (
-                                    <td key={"row0" + colIndex}>
-                                        <CellComponent value={this.props.grid[0][colIndex]}
-                                                       onChange={this.handleGridChange.bind(this, 0, colIndex)}/>
-                                    </td>
-                                )
-                            )}
-                    </tr>
-                    <tr>
-                        {
+                    <table className="sudoku-grid">
+                        <tbody>
+                        <tr>
+                            {
+                                this.props.grid[0].map((cell, colIndex) => (
+                                        <td key={"row0" + colIndex}>
+                                            <CellComponent value={this.props.grid[0][colIndex]}
+                                                        onChange={this.handleGridChange.bind(this, 0, colIndex)}/>
+                                        </td>
+                                    )
+                                )}
+                        </tr>
+                        <tr>
+                            {
 
-                            this.props.grid[1].map((cell, colIndex) => (
-                                    <td key={"row1" + colIndex}>
-                                        <CellComponent value={this.props.grid[1][colIndex]}
-                                                       onChange={this.handleGridChange.bind(this, 1, colIndex)}/>
-                                    </td>
-                                )
-                            )}
-                    </tr>
-                    <tr>
-                        {
-                            this.props.grid[2].map((cell, colIndex) => (
-                                    <td key={"row2" + colIndex}>
-                                        <CellComponent value={this.props.grid[2][colIndex]}
-                                                       onChange={this.handleGridChange.bind(this, 2, colIndex)}/>
-                                    </td>
-                                )
-                            )}
-                    </tr>
-                    <tr>
-                        {
-                            this.props.grid[3].map((cell, colIndex) => (
-                                    <td key={"row3" + colIndex}>
-                                        <CellComponent value={this.props.grid[3][colIndex]}
-                                                       onChange={this.handleGridChange.bind(this, 3, colIndex)}/>
-                                    </td>
-                                )
-                            )}
-                    </tr>
-                    <tr>
-                        {
-                            this.props.grid[4].map((cell, colIndex) => (
-                                    <td key={"row4" + colIndex}>
-                                        <CellComponent value={this.props.grid[4][colIndex]}
-                                                       onChange={this.handleGridChange.bind(this, 4, colIndex)}/>
-                                    </td>
-                                )
-                            )}
-                    </tr>
-                    <tr>
-                        {
-                            this.props.grid[5].map((cell, colIndex) => (
-                                    <td key={"row5" + colIndex}>
-                                        <CellComponent value={this.props.grid[5][colIndex]}
-                                                       onChange={this.handleGridChange.bind(this, 5, colIndex)}/>
-                                    </td>
-                                )
-                            )}
-                    </tr>
-                    <tr>
-                        {
-                            this.props.grid[6].map((cell, colIndex) => (
-                                    <td key={"row6" + colIndex}>
-                                        <CellComponent value={this.props.grid[6][colIndex]}
-                                                       onChange={this.handleGridChange.bind(this, 6, colIndex)}/>
-                                    </td>
-                                )
-                            )}
-                    </tr>
-                    <tr>
-                        {
-                            this.props.grid[7].map((cell, colIndex) => (
-                                    <td key={"row7" + colIndex}>
-                                        <CellComponent value={this.props.grid[7][colIndex]}
-                                                       onChange={this.handleGridChange.bind(this, 7, colIndex)}/>
-                                    </td>
-                                )
-                            )}
-                    </tr>
-                    <tr>
-                        {
-                            this.props.grid[8].map((cell, colIndex) => (
-                                    <td key={"row8" + colIndex}>
-                                        <CellComponent value={this.props.grid[8][colIndex]}
-                                                       onChange={this.handleGridChange.bind(this, 8, colIndex)}/>
-                                    </td>
-                                )
-                            )}
-                    </tr>
-                    </tbody>
-                </table>
+                                this.props.grid[1].map((cell, colIndex) => (
+                                        <td key={"row1" + colIndex}>
+                                            <CellComponent value={this.props.grid[1][colIndex]}
+                                                        onChange={this.handleGridChange.bind(this, 1, colIndex)}/>
+                                        </td>
+                                    )
+                                )}
+                        </tr>
+                        <tr>
+                            {
+                                this.props.grid[2].map((cell, colIndex) => (
+                                        <td key={"row2" + colIndex}>
+                                            <CellComponent value={this.props.grid[2][colIndex]}
+                                                        onChange={this.handleGridChange.bind(this, 2, colIndex)}/>
+                                        </td>
+                                    )
+                                )}
+                        </tr>
+                        <tr>
+                            {
+                                this.props.grid[3].map((cell, colIndex) => (
+                                        <td key={"row3" + colIndex}>
+                                            <CellComponent value={this.props.grid[3][colIndex]}
+                                                        onChange={this.handleGridChange.bind(this, 3, colIndex)}/>
+                                        </td>
+                                    )
+                                )}
+                        </tr>
+                        <tr>
+                            {
+                                this.props.grid[4].map((cell, colIndex) => (
+                                        <td key={"row4" + colIndex}>
+                                            <CellComponent value={this.props.grid[4][colIndex]}
+                                                        onChange={this.handleGridChange.bind(this, 4, colIndex)}/>
+                                        </td>
+                                    )
+                                )}
+                        </tr>
+                        <tr>
+                            {
+                                this.props.grid[5].map((cell, colIndex) => (
+                                        <td key={"row5" + colIndex}>
+                                            <CellComponent value={this.props.grid[5][colIndex]}
+                                                        onChange={this.handleGridChange.bind(this, 5, colIndex)}/>
+                                        </td>
+                                    )
+                                )}
+                        </tr>
+                        <tr>
+                            {
+                                this.props.grid[6].map((cell, colIndex) => (
+                                        <td key={"row6" + colIndex}>
+                                            <CellComponent value={this.props.grid[6][colIndex]}
+                                                        onChange={this.handleGridChange.bind(this, 6, colIndex)}/>
+                                        </td>
+                                    )
+                                )}
+                        </tr>
+                        <tr>
+                            {
+                                this.props.grid[7].map((cell, colIndex) => (
+                                        <td key={"row7" + colIndex}>
+                                            <CellComponent value={this.props.grid[7][colIndex]}
+                                                        onChange={this.handleGridChange.bind(this, 7, colIndex)}/>
+                                        </td>
+                                    )
+                                )}
+                        </tr>
+                        <tr>
+                            {
+                                this.props.grid[8].map((cell, colIndex) => (
+                                        <td key={"row8" + colIndex}>
+                                            <CellComponent value={this.props.grid[8][colIndex]}
+                                                        onChange={this.handleGridChange.bind(this, 8, colIndex)}/>
+                                        </td>
+                                    )
+                                )}
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }

@@ -1,7 +1,19 @@
 .App {
 }
 
+.main-container{
+  display: flex;
+  flex-direction: row;
+}
+
+.button-container{
+  display: flex;
+  flex-direction: column;
+}
+
 .sudoku-grid-container{
+  justify-content: center;
+  flex:1;
 }
 
 .buttons{
