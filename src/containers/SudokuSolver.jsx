@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import CellComponent from "../components/CellComponent";
 import { connect } from 'react-redux';
-import { updatePuzzleData, clearData, initSamplePuzzle, fetchPuzzleSolution } from '../actions/actionCreators';
+import { updatePuzzleData, clearData, initSamplePuzzle, fetchPuzzleSolution, getPuzzle } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
     //if grid is undefined, initialize with empty arrays which we use later
@@ -23,7 +23,8 @@ function mapDispatchToProps(dispatch) {
         updatePuzzleData :  grid => dispatch(updatePuzzleData(grid)),
         clearData : () => dispatch(clearData()),
         initSamplePuzzle : () => dispatch(initSamplePuzzle()),
-        fetchPuzzleSolution : () => fetchPuzzleSolution() 
+        fetchPuzzleSolution : () => fetchPuzzleSolution(),
+        getPuzzle : () => getPuzzle(),
     }
 }
 
@@ -57,6 +58,7 @@ class ConnectedSudokuSolver extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClear = this.handleClear.bind(this);
         this.handleResetSample = this.handleResetSample.bind(this);
+        this.getPuzzle = this.getPuzzle.bind(this);
     };
 
     //handler approach 2:
@@ -103,6 +105,11 @@ class ConnectedSudokuSolver extends Component {
         this.props.initSamplePuzzle();
     }
 
+    getPuzzle(event){
+        //TODO parameterize this
+        this.props.getPuzzle('hard');
+    }
+
     /**
      * Load initial state with a sample.
      */
@@ -133,8 +140,8 @@ class ConnectedSudokuSolver extends Component {
 
     render() {
         return (
-            <div class="main-container">
-                <div class="button-container">
+            <div className="main-container">
+                <div className="button-container">
                     <div id="messages">{this.props.message}</div>
                     <div>
                         <button className="buttons" onClick={this.handleSubmit}>Solve Puzzle</button>
@@ -149,13 +156,13 @@ class ConnectedSudokuSolver extends Component {
                         <br/>
                     </div>
                     <div>
-                        <button>Load easy puzzle</button>                        
+                        <button onClick={this.getPuzzle}>Load easy puzzle</button>                        
                     </div>
                     <div>
-                        <button>Load medium puzzle</button>                        
+                        <button onClick={this.getPuzzle}>Load medium puzzle</button>
                     </div>
                     <div>
-                        <button>Load hard puzzle</button>                        
+                        <button onClick={this.getPuzzle}>Load hard puzzle</button>
                     </div>
                 </div>
                 <div className="sudoku-grid-container">

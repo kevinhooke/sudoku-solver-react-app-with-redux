@@ -81,7 +81,53 @@ export function fetchPuzzleSolution() {
                 } else {
                     //dispatch response
                     //var parsedData = SudokuSolverAction.parseResponse(res.body);
-                    var parsedData = parseResponse(res.body);
+                    var parsedData = parseResponse(res.body.rows);
+                    //Flux dispatch approach
+                    //AppDispatcher.dispatch({
+                    //    actionName: 'UPDATE',
+                    //    data: parsedData
+                    //});
+                    store.dispatch( {
+                        type: 'UPDATE',
+                        data: parsedData
+                    });
+                }
+            }
+        });
+}
+
+export function getPuzzle(difficulty) {
+    console.log("actionCreators: getPuzzle()");
+
+    var requestPayload = {};
+
+    //request.get('https://7ivvexkae1.execute-api.us-west-1.amazonaws.com/sudoku/puzzle?difficuty=' + difficulty)
+    request.get('https://7ivvexkae1.execute-api.us-west-1.amazonaws.com/sudoku/puzzle')
+        .set('Content-Type', 'application/json')
+        .timeout({
+            response: 5000,  // 3 secs before response
+            deadline: 10000, // 6 sec to complete
+        })
+        .end(function(err, res){
+            if (err) {
+                console.log("request failed: " + JSON.stringify(err));
+            } else {
+                console.log("success: ");
+                console.log(JSON.stringify(res));
+                if (res.body.errorMessage) {
+                    //Flux dispatch response
+                    //AppDispatcher.dispatch({
+                    //    actionName: 'ERROR',
+                    //    message: "Failed to solve puzzle, is it a valid puzzle with a single solution?"
+                    //});
+                    store.dispatch( {
+                        type: 'ERROR',
+                        message: "Failed to get puzzle?"
+                    });
+                } else {
+                    //dispatch response
+                    //var parsedData = SudokuSolverAction.parseResponse(res.body);
+                    var parsedData = parseResponse(res.body.data.puzzle.puzzle);
                     //Flux dispatch approach
                     //AppDispatcher.dispatch({
                     //    actionName: 'UPDATE',
@@ -99,10 +145,13 @@ export function fetchPuzzleSolution() {
 //parses response from api call
 function parseResponse(response){
     var parsedData = {};
-    var temp = response.rows;
+    var temp = response;
     for (var row=0;row<9;row++) {
         parsedData[row] = [];
-        parsedData[row] = temp[row].split('');
+        let rowValues = temp[row];
+        parsedData[row] = rowValues.split('');
+        //replace '.'s with '' for display in the grid
+        parsedData[row] = parsedData[row].map( (value, index) => { return value === '.' ? '' : value});
     }
     return parsedData;
 }
@@ -110,7 +159,7 @@ function parseResponse(response){
 //builds request to Solver API (AWS Lambda)
 function buildRequest(){
     var requestData = [];
-    //Previous Flux approac
+    //Previous Flux approach
     //use slice() to clone the original array, to not modify it directly
     //var currentData = SudokuSolverStore.getData().slice();
     //get state from Redux store
@@ -121,7 +170,7 @@ function buildRequest(){
         //clone a copy of the current row array
         var currentRow = [...currentData[row]];
         for(var cell=0;cell<9;cell++){
-            if(currentRow[cell] === ""){
+            if(currentRow[cell].trim() === ""){
                 currentRow[cell] = ".";
             }
         }
