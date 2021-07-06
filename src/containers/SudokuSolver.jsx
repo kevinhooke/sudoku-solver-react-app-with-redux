@@ -64,7 +64,8 @@ class ConnectedSudokuSolver extends Component {
     //handler approach 2:
     handleGridChange(row, colIndex, event) {
         console.log("row [" + row + "] col [" + colIndex + "] : " + event.target.value);
-        var updatedGrid = [...this.state.grid];
+        //var updatedGrid = [...this.state.grid];
+        var updatedGrid = [...this.props.grid];
         updatedGrid[row][colIndex] = event.target.value;
 
         //before adding Flux, to update state directly

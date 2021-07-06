@@ -22,7 +22,7 @@ export function clearData(){
 }
 
 export function updatePuzzleData(payload) {
-    return { type: NEW_DATA, payload }
+    return { type: NEW_DATA, grid: payload }
 };
 
 export function initSamplePuzzle(){
