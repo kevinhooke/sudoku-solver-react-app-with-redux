@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import CellComponent from "../components/CellComponent";
 import { connect } from 'react-redux';
-import { updatePuzzleData, clearData, initSamplePuzzle, fetchPuzzleSolution, getPuzzle } from '../actions/actionCreators';
+import { updatePuzzleData, updateSpinner, clearData, initSamplePuzzle, fetchPuzzleSolution, getPuzzle } from '../actions/actionCreators';
 
 const mapStateToProps = state => {
     //if grid is undefined, initialize with empty arrays which we use later
@@ -14,7 +15,8 @@ const mapStateToProps = state => {
     }
     return { 
         grid: state.grid,
-        message: state.message
+        message: state.message,
+        showSpinner: state.showSpinner
      };
 };
 
@@ -25,6 +27,7 @@ function mapDispatchToProps(dispatch) {
         initSamplePuzzle : () => dispatch(initSamplePuzzle()),
         fetchPuzzleSolution : () => fetchPuzzleSolution(),
         getPuzzle : () => getPuzzle(),
+        updateSpinner : (value) => dispatch(updateSpinner(value))
     }
 }
 
@@ -59,6 +62,7 @@ class ConnectedSudokuSolver extends Component {
         this.handleClear = this.handleClear.bind(this);
         this.handleResetSample = this.handleResetSample.bind(this);
         this.getPuzzle = this.getPuzzle.bind(this);
+        this.updateSpinner = this.updateSpinner(this);
     };
 
     //handler approach 2:
@@ -81,10 +85,12 @@ class ConnectedSudokuSolver extends Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log("submit pressed");
+        this.props.updateSpinner("true");
         //TODO add fetch
         //SudokuSolverAction.callSolverLambda();
         //Redux Action creator
         this.props.fetchPuzzleSolution();
+        //this.props.updateSpinner(false);
     }
 
     handleClear(event) {
@@ -107,6 +113,7 @@ class ConnectedSudokuSolver extends Component {
     }
 
     getPuzzle(event){
+        this.props.updateSpinner("true");
         //TODO parameterize this
         this.props.getPuzzle('hard');
     }
@@ -130,6 +137,11 @@ class ConnectedSudokuSolver extends Component {
         //this.setState({message: SudokuSolverStore.getMessage()});
     }
 
+    updateSpinner(value){
+        //TODO how to update only one vale, preserving rest of state in store
+        this.props.updateSpinner(value);
+    }
+
     /**
      * Updates state when an event is triggered from the Store.
      */
@@ -142,6 +154,11 @@ class ConnectedSudokuSolver extends Component {
     render() {
         return (
             <div className="main-container">
+
+                <div className="spinner">
+                    { this.props.showSpinner === "true" && <CircularProgress/> }
+                </div>
+
                 <div className="button-container">
                     <div id="messages">{this.props.message}</div>
                     <div>
@@ -167,7 +184,6 @@ class ConnectedSudokuSolver extends Component {
                     </div>
                 </div>
                 <div className="sudoku-grid-container">
-
                     <table className="sudoku-grid">
                         <tbody>
                         <tr>

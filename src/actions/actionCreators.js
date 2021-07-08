@@ -1,6 +1,6 @@
 import store from '../stores/SudokuSolverReduxStore';
 import request from 'superagent';
-import { NEW_DATA } from './ActionConstants';
+import { NEW_DATA, UPDATE_SPINNER } from './ActionConstants';
 
 const emptyGrid = {
     rows:
@@ -18,7 +18,11 @@ const emptyGrid = {
 }
 
 export function clearData(){
-    return { type: NEW_DATA, grid: emptyGrid.rows }
+    return { type: NEW_DATA, showSpinner : false, grid: emptyGrid.rows }
+}
+
+export function updateSpinner(value){
+    return { type: UPDATE_SPINNER, showSpinner : value }
 }
 
 export function updatePuzzleData(payload) {
@@ -28,6 +32,7 @@ export function updatePuzzleData(payload) {
 export function initSamplePuzzle(){
     console.log("actionCreators initSamplePuzzle()");
     var puzzle = {
+        showSpinner : "false",
         rows:
             [
                 ["", "", "", "8", "1", "", "6", "7", ""],
@@ -59,8 +64,8 @@ export function fetchPuzzleSolution() {
         .send(requestPayload)
         .set('Content-Type', 'application/json')
         .timeout({
-            response: 5000,  // 3 secs before response
-            deadline: 10000, // 6 sec to complete
+            response: 10000,  // 10 secs before response
+            deadline: 15000, // 15 sec to complete
         })
         .end(function(err, res){
             if (err) {
@@ -105,8 +110,8 @@ export function getPuzzle(difficulty) {
     request.get('https://7ivvexkae1.execute-api.us-west-1.amazonaws.com/sudoku/puzzle')
         .set('Content-Type', 'application/json')
         .timeout({
-            response: 5000,  // 3 secs before response
-            deadline: 10000, // 6 sec to complete
+            response: 10000,  // 10 secs before response
+            deadline: 15000, // 15 sec to complete
         })
         .end(function(err, res){
             if (err) {

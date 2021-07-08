@@ -20,7 +20,8 @@ function puzzleDataReducer(state = puzzleData, action) {
 
         case 'NEW_DATA' :
             console.log("puzzleDataReducer is handling NEW_DATA action! ");
-            return Object.assign( {}, { grid: action.grid } );
+            //return Object.assign( {}, { grid: action.grid } );
+            return { ...state, showSpinner: "false", grid: action.grid };
 
         // case 'UPDATE_PREVIOUS':
         //     console.log("SudokuSolverReduxStore is handling UPDATE action!: "
@@ -44,7 +45,9 @@ function puzzleDataReducer(state = puzzleData, action) {
                 console.log("row: " + JSON.stringify(action.data[row]));
                 newData[row] = action.data[row];
             }
-            return Object.assign( {}, { grid : newData } );
+            //return Object.assign( {}, { grid : newData } );
+            return { ...state, grid : newData, showSpinner : "false" };
+
 
         // case 'ERROR_PREVIOUS' :
         //     this.setMessage(action.message);
@@ -53,8 +56,14 @@ function puzzleDataReducer(state = puzzleData, action) {
 
         case 'ERROR' :
             console.log("puzzleDataReducer is handling ERROR action!");
-            let result = Object.assign( {}, { message : action.message } );
-            return Object.assign( result, action.data );
+            //let result = Object.assign( {}, { message : action.message } );
+            //return Object.assign( result, action.data );
+            return{ ...state, message : action.message};
+
+        case 'UPDATE_SPINNER' :
+            console.log("puzzleDataReducer is handling UPDATE_SPINNER action!");
+            //return Object.assign( {}, { showSpinner : action.showSpinner } );
+            return { ...state, showSpinner : action.showSpinner };
 
         default:
             return state;
