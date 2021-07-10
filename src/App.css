@@ -9,15 +9,24 @@
 .button-container{
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 
 .sudoku-grid-container{
   justify-content: center;
-  flex:1;
+  flex-grow:1;
+  flex: 1;
 }
 
 .buttons{
   text-align: center;
+  flex-grow:1;
+}
+
+.puzzle-info{
+  text-align: left;
+  flex-grow:1;
+  flex: 1;
 }
 
 .spinner{

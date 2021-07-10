@@ -21,7 +21,12 @@ function puzzleDataReducer(state = puzzleData, action) {
         case 'NEW_DATA' :
             console.log("puzzleDataReducer is handling NEW_DATA action! ");
             //return Object.assign( {}, { grid: action.grid } );
-            return { ...state, showSpinner: "false", grid: action.grid };
+            return { ...state, 
+                showSpinner: "false",
+                grid: action.grid,
+                puzzleId: action.puzzleId,
+                puzzleDifficulty: action.puzzleDifficulty
+             };
 
         // case 'UPDATE_PREVIOUS':
         //     console.log("SudokuSolverReduxStore is handling UPDATE action!: "
@@ -46,7 +51,12 @@ function puzzleDataReducer(state = puzzleData, action) {
                 newData[row] = action.data[row];
             }
             //return Object.assign( {}, { grid : newData } );
-            return { ...state, grid : newData, showSpinner : "false" };
+            return { ...state, 
+                grid : newData,
+                showSpinner : "false",
+                puzzleId: action.puzzleId,
+                puzzleDifficulty: action.puzzleDifficulty
+            };
 
 
         // case 'ERROR_PREVIOUS' :

@@ -140,7 +140,9 @@ export function getPuzzle(difficulty) {
                     //});
                     store.dispatch( {
                         type: 'UPDATE',
-                        data: parsedData
+                        data: parsedData,
+                        puzzleId : res.body.data.puzzle.id,
+                        puzzleDifficulty: res.body.data.puzzle.difficulty
                     });
                 }
             }

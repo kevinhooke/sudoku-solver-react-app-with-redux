@@ -16,7 +16,9 @@ const mapStateToProps = state => {
     return { 
         grid: state.grid,
         message: state.message,
-        showSpinner: state.showSpinner
+        showSpinner: state.showSpinner,
+        puzzleId: state.puzzleId,
+        puzzleDifficulty: state.puzzleDifficulty
      };
 };
 
@@ -279,6 +281,11 @@ class ConnectedSudokuSolver extends Component {
                         </tr>
                         </tbody>
                     </table>
+                </div>
+                <div className="puzzle-info">
+                    <p>Puzzle id:</p>
+                    <p>{ this.props.puzzleId }</p>
+                    <p>Difficulty: { this.props.puzzleDifficulty }</p>
                 </div>
             </div>
         );
