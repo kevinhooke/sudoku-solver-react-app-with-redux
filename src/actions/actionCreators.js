@@ -1,6 +1,7 @@
 import store from '../stores/SudokuSolverReduxStore';
 import request from 'superagent';
 import { NEW_DATA, UPDATE_SPINNER } from './ActionConstants';
+import config from '../config.js';
 
 const emptyGrid = {
     rows:
@@ -107,7 +108,7 @@ export function getPuzzle(difficulty) {
     var requestPayload = {};
 
     //request.get('https://7ivvexkae1.execute-api.us-west-1.amazonaws.com/sudoku/puzzle?difficuty=' + difficulty)
-    request.get('https://7ivvexkae1.execute-api.us-west-1.amazonaws.com/sudoku/puzzle')
+    request.get(config.getPuzzleUrl + '?difficuty=' + difficulty)
         .set('Content-Type', 'application/json')
         .timeout({
             response: 10000,  // 10 secs before response

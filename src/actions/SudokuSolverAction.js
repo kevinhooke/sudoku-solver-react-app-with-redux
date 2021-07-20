@@ -1,3 +1,11 @@
+/*
+
+Flux style Action - no longer used in this solution as it was 
+replaced by actionCreator.js with Redux, but left here as a comparison
+between the two approaches.
+
+
+*/
 import request from 'superagent';
 import AppDispatcher from "../dispatcher/Dispatcher";
 import SudokuSolverStore from "../stores/SudokuSolverStore";
