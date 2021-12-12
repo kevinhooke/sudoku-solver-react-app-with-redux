@@ -175,13 +175,13 @@ class ConnectedSudokuSolver extends Component {
                         <br/>
                     </div>
                     <div>
-                        <button onClick={ () => this.handleGetPuzzle('easy')}>Load easy puzzle</button>                        
+                        <button onClick={ () => this.handleGetPuzzle('EASY')}>Load easy puzzle</button>                        
                     </div>
                     <div>
-                        <button onClick={ () => this.handleGetPuzzle('medium')}>Load medium puzzle</button>
+                        <button onClick={ () => this.handleGetPuzzle('MEDIUM')}>Load medium puzzle</button>
                     </div>
                     <div>
-                        <button onClick={() => this.handleGetPuzzle('hard')}>Load hard puzzle</button>
+                        <button onClick={() => this.handleGetPuzzle('HARD')}>Load hard puzzle</button>
                     </div>
                 </div>
                 <div className="sudoku-grid-container">

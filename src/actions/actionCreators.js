@@ -107,8 +107,8 @@ export function getPuzzle(difficulty) {
 
     var requestPayload = {};
 
-    //request.get('https://7ivvexkae1.execute-api.us-west-1.amazonaws.com/sudoku/puzzle?difficuty=' + difficulty)
-    request.get(config.getPuzzleUrl + '?difficuty=' + difficulty)
+    //request.get('https://7ivvexkae1.execute-api.us-west-1.amazonaws.com/sudoku/puzzle?difficulty=' + difficulty)
+    request.get(config.getPuzzleUrl + '?difficulty=' + difficulty)
         .set('Content-Type', 'application/json')
         .timeout({
             response: 10000,  // 10 secs before response
