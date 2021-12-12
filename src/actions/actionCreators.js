@@ -103,7 +103,7 @@ export function fetchPuzzleSolution() {
 }
 
 export function getPuzzle(difficulty) {
-    console.log("actionCreators: getPuzzle()");
+    console.log("actionCreators: getPuzzle(): " + difficulty);
 
     var requestPayload = {};
 

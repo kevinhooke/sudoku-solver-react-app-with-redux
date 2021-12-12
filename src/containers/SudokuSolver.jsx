@@ -28,7 +28,7 @@ function mapDispatchToProps(dispatch) {
         clearData : () => dispatch(clearData()),
         initSamplePuzzle : () => dispatch(initSamplePuzzle()),
         fetchPuzzleSolution : () => fetchPuzzleSolution(),
-        getPuzzle : () => getPuzzle(),
+        getPuzzle : (difficulty) => getPuzzle(difficulty),
         updateSpinner : (value) => dispatch(updateSpinner(value))
     }
 }
@@ -63,7 +63,6 @@ class ConnectedSudokuSolver extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleClear = this.handleClear.bind(this);
         this.handleResetSample = this.handleResetSample.bind(this);
-        this.getPuzzle = this.getPuzzle.bind(this);
         this.updateSpinner = this.updateSpinner(this);
     };
 
@@ -114,10 +113,10 @@ class ConnectedSudokuSolver extends Component {
         this.props.initSamplePuzzle();
     }
 
-    getPuzzle(event){
+    handleGetPuzzle = (difficulty) => {
+        console.log("handleGetPuzzle(): " + difficulty)
         this.props.updateSpinner("true");
-        //TODO parameterize this
-        this.props.getPuzzle('hard');
+        this.props.getPuzzle(difficulty);
     }
 
     /**
@@ -176,13 +175,13 @@ class ConnectedSudokuSolver extends Component {
                         <br/>
                     </div>
                     <div>
-                        <button onClick={this.getPuzzle}>Load easy puzzle</button>                        
+                        <button onClick={ () => this.handleGetPuzzle('easy')}>Load easy puzzle</button>                        
                     </div>
                     <div>
-                        <button onClick={this.getPuzzle}>Load medium puzzle</button>
+                        <button onClick={ () => this.handleGetPuzzle('medium')}>Load medium puzzle</button>
                     </div>
                     <div>
-                        <button onClick={this.getPuzzle}>Load hard puzzle</button>
+                        <button onClick={() => this.handleGetPuzzle('hard')}>Load hard puzzle</button>
                     </div>
                 </div>
                 <div className="sudoku-grid-container">
